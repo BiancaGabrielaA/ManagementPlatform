@@ -27,5 +27,20 @@ services:
       - /app/node_modules
     command: npm run start:dev
 
+  frontend:
+    build: ./frontend
+    container_name: management-platform-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_URL: http://localhost:3000
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm run dev -- --host
+
 volumes:
   postgres_data:
