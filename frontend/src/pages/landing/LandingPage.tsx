@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Preview from "./components/Preview";
 import Pricing from "./components/Pricing";
+import { Link } from "react-router-dom";
 
 function LandingPage() {
   return (
@@ -22,12 +23,18 @@ function LandingPage() {
         </ul>
 
         <div className="flex items-center gap-3">
-          <button className="rounded-lg px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100">
+          <Link
+            to="/login"
+            className="rounded-xl border border-slate-300 px-5 py-2 font-semibold text-slate-700 transition hover:bg-slate-100"
+          >
             Login
-          </button>
-          <button className="rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-white transition text-white transition hover:opacity-90">
+          </Link>
+          <Link
+            to="/register"
+            className="rounded-xl bg-primary px-5 py-2 font-semibold text-white transition hover:opacity-90"
+          >
             Get Started
-          </button>
+          </Link>
         </div>
       </div>
     </nav>
