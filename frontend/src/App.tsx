@@ -8,6 +8,9 @@ import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import NotFoundPage from "./pages/notfound/NotFoundPage";
+import ManageTeamsPage from "./pages/admin/ManageTeamsPage";
+import ManageUsersPage from "./pages/admin/ManageUsersPage";
+import DashboardLayout from "./pages/dashboard/DashboardLayout";
 
 function App() {
   return (
@@ -20,13 +23,13 @@ function App() {
 
         {/* Protected routes */}
         <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<DashboardPage />} />
-
-          {/* Aici vei adăuga pe viitor */}
-          {/* <Route path="/teams" element={<TeamsPage />} /> */}
-          {/* <Route path="/tickets" element={<TicketsPage />} /> */}
-          {/* <Route path="/users" element={<UsersPage />} /> */}
+          <Route element={<DashboardLayout/>}>
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/admin/teams" element={<ManageTeamsPage />} />
+            <Route path="/admin/users" element={<ManageUsersPage />} />
+          </Route>
         </Route>
+
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </AuthProvider>

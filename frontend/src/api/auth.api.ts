@@ -15,6 +15,7 @@ export interface LoginRequest {
 export interface User {
   id: string;
   email: string;
+  name: string;
   role: string;
 }
 
@@ -52,5 +53,10 @@ export async function getCurrentUser() {
   const response = await api.get("/auth/me", {
     withCredentials: true,
   });
+  return response.data;
+}
+
+export async function logoutUser() {
+  const response = await api.post("/auth/logout");
   return response.data;
 }
