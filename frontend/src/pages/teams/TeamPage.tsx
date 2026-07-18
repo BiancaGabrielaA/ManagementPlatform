@@ -73,12 +73,12 @@ function TeamPage() {
       </div>
 
       {activeTab === "board" && <TeamBoard teamId={team.id} />}
-      {/* {activeTab === "tickets" && <TeamTickets teamId={team.id} />}
+      {activeTab === "tickets" && <TeamTickets teamId={team.id} />}
       {activeTab === "sprints" && <TeamSprints teamId={team.id} />}
       {activeTab === "backlog" && <TeamBacklog teamId={team.id} />}
       {activeTab === "members" && (
         <TeamMembers team={team} onMembersChanged={(_, users) => setTeam({ ...team, users })} />
-      )}  */}
+      )}  
     </div>
   );
 }

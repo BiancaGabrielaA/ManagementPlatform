@@ -1,24 +1,51 @@
 import api from "./axios";
 
+export type TicketStatus = "TODO" | "IN_PROGRESS" | "IN_REVIEW" | "DONE";
+export type Priority = "LOW" | "MEDIUM" | "HIGH";
+
+export interface CreateTicketDto {
+  title: string;
+  description: string | null;
+  priority: Priority;
+  teamId: number;
+  assigneeId: number | null;
+}
+
 export interface Ticket {
   id: number;
-  name: string;
+  title: string;
   description: string | null;
-  
+  status: TicketStatus;
+  priority: Priority;
+  teamId: number;
+  assignee?: {
+    id: number;
+    name: string;
+    email: string;
+  } | null;
+  createdAt: string;
 }
 
-export interface TicketStatus {
-  id: number;
-  name: string;
-  description: string | null;
-}
-
-export async function getTicketsByTeam() {
-  const response = await api.post("/auth/logout");
+export async function getTicketsByTeam(teamId: number) {
+  const response = await api.get(`/tickets/team/${teamId}`);
   return response.data;
 }
 
-export async function updateTicketStatus() {
-  const response = await api.post("/auth/logout");
+export async function updateTicketStatus(
+  ticketId: number,
+  status: TicketStatus
+): Promise<Ticket> {
+  const response = await api.patch(`/tickets/${ticketId}/status`, { status });
+  return response.data;
+}
+
+export async function deleteTicket(ticketId: number)
+{
+  const response = await api.delete(`/tickets/${ticketId}`);
+  return response.data;
+}
+
+export async function createTicket(dto: CreateTicketDto): Promise<Ticket> {
+  const response = await api.post("/tickets", dto);
   return response.data;
 }
