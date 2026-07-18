@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
-import { getAllUsers, deleteUser, type UserListItem } from "@/api/users.api";
+import { getAllUsers, type UserListItem } from "@/api/users.api";
 import EditUserModal from "./components/EditUserModal";
-import DeleteUserModal from "./components/DeleteUserModa";
+import DeleteUserModal from "./components/DeleteUserModal";
 
 function ManageUsersPage() {
   const [users, setUsers] = useState<UserListItem[]>([]);
