@@ -22,7 +22,6 @@ function ManageTeamsPage() {
     setIsLoading(true);
     try {
       const data = await getAllTeams();
-      console.log(data);
       setTeams(data);
     } catch {
       setError("Nu am putut încărca echipele.");

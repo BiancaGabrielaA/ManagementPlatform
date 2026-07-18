@@ -24,11 +24,11 @@ export async function deleteTeam(id: number) {
 }
 
 export async function addUserToTeam(teamId: number, userId: number) {
-  const response = await api.post(`/teams/${teamId}/members/${userId}`);
+  const response = await api.post(`/teams/${teamId}/users/${userId}`);
   return response.data;
 }
 
 export async function deleteUserFromTeam(teamId: number, userId: number) {
-  const response = await api.delete(`/teams/${teamId}/members/${userId}`);
+  const response = await api.delete(`/teams/${teamId}/users/${userId}`);
   return response.data;
 }

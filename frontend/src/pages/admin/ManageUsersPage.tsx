@@ -19,7 +19,6 @@ function ManageUsersPage() {
     setIsLoading(true);
     try {
       const data = await getAllUsers();
-      console.log(data);
       setUsers(data);
     } catch {
       setError("Nu am putut încărca userii.");

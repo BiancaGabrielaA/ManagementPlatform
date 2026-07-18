@@ -17,6 +17,7 @@ function ManageTeamMembersModal({ team, onClose, onMembersChanged }: Props) {
   const [pendingId, setPendingId] = useState<number | null>(null);
 
   useEffect(() => {
+
     getAllUsers().then(setAllUsers).catch(() => setError("Nu am putut încărca userii."));
   }, []);
 
@@ -33,7 +34,7 @@ function ManageTeamMembersModal({ team, onClose, onMembersChanged }: Props) {
       const updated = [...members, user];
       setMembers(updated);
       onMembersChanged(team.id, updated);
-    } catch {
+    } catch(error) {
       setError("Nu am putut adăuga userul în echipă.");
     } finally {
       setPendingId(null);
