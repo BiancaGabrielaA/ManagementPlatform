@@ -85,9 +85,10 @@ function ManageTeamMembersModal({ team, onClose, onMembersChanged }: Props) {
                 key={user.id}
                 className="flex items-center justify-between rounded-lg px-2 py-2 hover:bg-slate-50"
               >
-                <div>
+                <div className="flex items-center gap-2">
                   <p className="text-sm font-medium text-slate-900">{user.name}</p>
                   <p className="text-xs text-slate-500">{user.email}</p>
+                  <p className="text-xs text-slate-500">{user.role}</p>
                 </div>
                 <button
                   onClick={() => handleRemove(user)}
@@ -120,9 +121,10 @@ function ManageTeamMembersModal({ team, onClose, onMembersChanged }: Props) {
                 key={user.id}
                 className="flex items-center justify-between rounded-lg px-2 py-2 hover:bg-slate-50"
               >
-                <div>
+                <div className="flex items-center gap-2">
                   <p className="text-sm font-medium text-slate-900">{user.name}</p>
                   <p className="text-xs text-slate-500">{user.email}</p>
+                  <p className="text-xs text-slate-500">{user.role}</p>
                 </div>
                 <button
                   onClick={() => handleAdd(user)}

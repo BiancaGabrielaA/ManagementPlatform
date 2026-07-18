@@ -11,6 +11,8 @@ import NotFoundPage from "./pages/notfound/NotFoundPage";
 import ManageTeamsPage from "./pages/admin/ManageTeamsPage";
 import ManageUsersPage from "./pages/admin/ManageUsersPage";
 import DashboardLayout from "./pages/dashboard/DashboardLayout";
+import TeamsPage from "./pages/teams/TeamsPage";
+import TeamPage from "./pages/teams/TeamPage";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/admin/teams" element={<ManageTeamsPage />} />
             <Route path="/admin/users" element={<ManageUsersPage />} />
+            <Route path="/teams" element={<TeamsPage />} />
+            <Route path="/teams/:id" element={<TeamPage />} />
           </Route>
         </Route>
 

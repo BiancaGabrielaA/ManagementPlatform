@@ -32,3 +32,14 @@ export async function deleteUserFromTeam(teamId: number, userId: number) {
   const response = await api.delete(`/teams/${teamId}/users/${userId}`);
   return response.data;
 }
+
+export async function getMyTeams() {
+  const response = await api.get(`/teams/mine`);
+  return response.data;
+}
+
+export async function getTeamById(teamId: number)
+{
+  const response = await api.get(`/teams/${teamId}`);
+  return response.data;
+}
