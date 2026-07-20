@@ -20,7 +20,7 @@ function DeleteUserModal({ user, onClose, onDeleted }: Props) {
       onDeleted(user.id);
       onClose();
     } catch {
-      setError("Nu am putut șterge userul. Încearcă din nou.");
+      setError("Failed to delete the user. Please try again.");
     } finally {
       setIsDeleting(false);
     }
@@ -47,9 +47,9 @@ function DeleteUserModal({ user, onClose, onDeleted }: Props) {
             <AlertTriangle className="h-5 w-5 text-red-600" />
           </div>
           <p className="text-sm text-slate-600">
-            Sigur vrei să ștergi userul{" "}
+            Are you sure you want to delete the user{" "}
             <span className="font-semibold text-slate-900">{user.name}</span>{" "}
-            ({user.email})? Această acțiune este ireversibilă.
+            ({user.email})? This action cannot be undone.
           </p>
         </div>
 

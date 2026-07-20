@@ -15,7 +15,7 @@ function CreateTeamModal({ onClose, onCreated }: Props) {
 
   const handleCreate = async () => {
     if (!name.trim()) {
-      setError("Numele echipei este obligatoriu.");
+      setError("Team name is required.");
       return;
     }
     setError("");
@@ -25,7 +25,7 @@ function CreateTeamModal({ onClose, onCreated }: Props) {
       onCreated(team);
       onClose();
     } catch {
-      setError("Nu am putut crea echipa. Încearcă din nou.");
+      setError("Failed to create the team. Please try again.");
     } finally {
       setIsSaving(false);
     }

@@ -57,7 +57,7 @@ function CreateTicketModal({ teamId, onClose, onCreated }: Props) {
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-slate-900">Ticket nou</h2>
+          <h2 className="text-lg font-semibold text-slate-900">New Ticket</h2>
           <button
             onClick={onClose}
             className="text-slate-400 hover:text-slate-600 text-xl leading-none"
@@ -69,7 +69,7 @@ function CreateTicketModal({ teamId, onClose, onCreated }: Props) {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">
-              Titlu
+              Title
             </label>
             <input
               type="text"
@@ -83,7 +83,7 @@ function CreateTicketModal({ teamId, onClose, onCreated }: Props) {
 
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">
-              Descriere
+              Description
             </label>
             <textarea
               value={description}
@@ -97,7 +97,7 @@ function CreateTicketModal({ teamId, onClose, onCreated }: Props) {
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">
-                Prioritate
+                Priority
               </label>
               <select
                 value={priority}
@@ -137,14 +137,14 @@ function CreateTicketModal({ teamId, onClose, onCreated }: Props) {
               onClick={onClose}
               className="text-sm font-medium text-slate-600 px-3 py-1.5 rounded-md hover:bg-slate-100"
             >
-              Anulează
+              Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
               className="text-sm font-medium bg-slate-900 text-white px-3 py-1.5 rounded-md hover:bg-slate-800 disabled:opacity-50"
             >
-              {isSubmitting ? "Se creează..." : "Creează"}
+              {isSubmitting ? "Creating..." : "Create"}
             </button>
           </div>
         </form>

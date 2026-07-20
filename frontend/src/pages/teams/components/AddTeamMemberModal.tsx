@@ -20,7 +20,7 @@ function AddTeamMemberModal({ team, existingMembers, onClose, onAdded }: Props) 
   useEffect(() => {
     getAllUsers()
       .then(setAllUsers)
-      .catch(() => setError("Nu am putut încărca userii."));
+      .catch(() => setError("Unable to load users"));
   }, []);
 
   const existingIds = new Set(existingMembers.map((m) => m.id));
@@ -38,7 +38,7 @@ function AddTeamMemberModal({ team, existingMembers, onClose, onAdded }: Props) 
       await addUserToTeam(team.id, user.id);
       onAdded([...existingMembers, user]);
     } catch {
-      setError("Nu am putut adăuga userul în echipă.");
+      setError("Unable to add the user to the team.");
     } finally {
       setPendingId(null);
     }
@@ -48,7 +48,7 @@ function AddTeamMemberModal({ team, existingMembers, onClose, onAdded }: Props) 
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6 max-h-[80vh] flex flex-col">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-slate-900">Adaugă membru</h2>
+          <h2 className="text-lg font-semibold text-slate-900">Add member</h2>
           <button
             onClick={onClose}
             className="text-slate-400 hover:text-slate-600 text-xl leading-none"
@@ -83,14 +83,14 @@ function AddTeamMemberModal({ team, existingMembers, onClose, onAdded }: Props) 
                 disabled={pendingId === u.id}
                 className="text-xs font-medium text-slate-900 border border-slate-200 rounded-md px-2 py-1 hover:bg-slate-100 disabled:opacity-50"
               >
-                {pendingId === u.id ? "..." : "Adaugă"}
+                {pendingId === u.id ? "..." : "Add"}
               </button>
             </div>
           ))}
 
           {availableUsers.length === 0 && (
             <p className="text-sm text-slate-400 italic text-center py-4">
-              Niciun rezultat.
+              No results found.
             </p>
           )}
         </div>

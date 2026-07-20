@@ -79,7 +79,7 @@ function RegisterPage() {
       const axiosError = error as AxiosError<{ message?: string }>;
       setServerError(
         axiosError.response?.data?.message ||
-          "A apărut o eroare. Te rugăm să încerci din nou."
+          "An error occurred. Please try again."
       );
     } finally {
       setIsSubmitting(false);

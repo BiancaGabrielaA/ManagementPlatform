@@ -21,14 +21,14 @@ function TeamMembers({ team, onMembersChanged }: Props) {
   const members = team.users ?? [];
 
   const handleRemove = async (userId: number) => {
-    if (!confirm("Sigur vrei să elimini acest membru din echipă?")) return;
+    if (!confirm("Are you sure you want to remove this member from the team?")) return;
     setRemovingId(userId);
     try {
       await deleteUserFromTeam(team.id, userId);
       const updated = members.filter((m) => m.id !== userId);
       onMembersChanged(team.id, updated);
     } catch {
-      setError("Nu am putut elimina membrul.");
+      setError("Unable to remove the member.");
     } finally {
       setRemovingId(null);
     }
@@ -38,14 +38,14 @@ function TeamMembers({ team, onMembersChanged }: Props) {
     <div>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-sm font-semibold text-slate-700">
-          Membri ({members.length})
+          Members ({members.length})
         </h2>
         {canManage && (
           <button
             onClick={() => setShowAddModal(true)}
             className="text-sm font-medium bg-slate-900 text-white px-3 py-1.5 rounded-md hover:bg-slate-800 transition"
           >
-            + Adaugă membru
+            + Add member
           </button>
         )}
       </div>
@@ -56,9 +56,9 @@ function TeamMembers({ team, onMembersChanged }: Props) {
         <table className="w-full text-sm">
           <thead className="bg-slate-50 text-slate-500 text-left">
             <tr>
-              <th className="px-4 py-2 font-medium">Nume</th>
+              <th className="px-4 py-2 font-medium">Name</th>
               <th className="px-4 py-2 font-medium">Email</th>
-              <th className="px-4 py-2 font-medium">Rol</th>
+              <th className="px-4 py-2 font-medium">Role</th>
               {canManage && <th className="px-4 py-2 font-medium"></th>}
             </tr>
           </thead>
@@ -75,7 +75,7 @@ function TeamMembers({ team, onMembersChanged }: Props) {
                       disabled={removingId === member.id}
                       className="text-xs text-red-600 hover:text-red-700 disabled:opacity-50"
                     >
-                      {removingId === member.id ? "..." : "Elimină"}
+                      {removingId === member.id ? "..." : "Delete"}
                     </button>
                   </td>
                 )}
@@ -85,7 +85,7 @@ function TeamMembers({ team, onMembersChanged }: Props) {
             {members.length === 0 && (
               <tr>
                 <td colSpan={canManage ? 4 : 3} className="px-4 py-6 text-center text-slate-400">
-                  Nicio persoană în această echipă încă.
+                  No members in this team yet.
                 </td>
               </tr>
             )}

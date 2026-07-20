@@ -19,14 +19,14 @@ function TeamsPage() {
       const data = await getMyTeams();
       setTeams(data);
     } catch {
-      setError("Nu am putut încărca echipele.");
+      setError("Failed to load the teams.");
     } finally {
       setIsLoading(false);
     }
   };
 
   if (isLoading) {
-    return <p className="p-6 text-sm text-slate-500">Se încarcă echipele...</p>;
+    return <p className="p-6 text-sm text-slate-500">Loading teams...</p>;
   }
 
   if (error) {
@@ -34,12 +34,12 @@ function TeamsPage() {
   }
 
   if (teams.length === 0) {
-    return <p className="p-6 text-sm text-slate-500">Nu faci parte din nicio echipă.</p>;
+    return <p className="p-6 text-sm text-slate-500">You are not a member of any team.</p>;
   }
 
   return (
     <div className="p-6">
-      <h1 className="text-xl font-semibold text-slate-900 mb-4">Echipele mele</h1>
+      <h1 className="text-xl font-semibold text-slate-900 mb-4">My Teams</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {teams.map((team) => (
           <button

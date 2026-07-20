@@ -40,7 +40,7 @@ function TeamSprints({ teamId, onTicketClick }: Props) {
       const data = await getSprintsByTeam(teamId);
       setSprints(data);
     } catch {
-      setError("Nu am putut încărca sprinturile.");
+      setError("Failed to load sprints.");
     } finally {
       setIsLoading(false);
     }
@@ -49,11 +49,11 @@ function TeamSprints({ teamId, onTicketClick }: Props) {
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !startDate || !endDate) {
-      setError("Toate câmpurile sunt obligatorii.");
+      setError("All fields are required.");
       return;
     }
     if (new Date(endDate) <= new Date(startDate)) {
-      setError("Data de final trebuie să fie după data de început.");
+      setError("The end date must be after the start date.");
       return;
     }
 
@@ -67,24 +67,24 @@ function TeamSprints({ teamId, onTicketClick }: Props) {
       setEndDate("");
       setShowCreateForm(false);
     } catch {
-      setError("Nu am putut crea sprintul.");
+      setError("Failed to create the sprint.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  if (isLoading) return <p className="text-sm text-slate-500">Se încarcă sprinturile...</p>;
+  if (isLoading) return <p className="text-sm text-slate-500">Loading sprints...</p>;
 
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-sm font-semibold text-slate-700">Sprinturi</h2>
+        <h2 className="text-sm font-semibold text-slate-700">Sprints</h2>
         {canManage && (
           <button
             onClick={() => setShowCreateForm((prev) => !prev)}
             className="text-sm font-medium bg-slate-900 text-white px-3 py-1.5 rounded-md hover:bg-slate-800 transition"
           >
-            + Sprint nou
+            + New Sprint
           </button>
         )}
       </div>
@@ -97,7 +97,7 @@ function TeamSprints({ teamId, onTicketClick }: Props) {
           className="border border-slate-200 rounded-lg p-4 mb-4 grid grid-cols-1 sm:grid-cols-4 gap-3 items-end"
         >
           <div className="sm:col-span-2">
-            <label className="block text-xs font-medium text-slate-600 mb-1">Nume</label>
+            <label className="block text-xs font-medium text-slate-600 mb-1">Name</label>
             <input
               type="text"
               value={name}
@@ -130,14 +130,14 @@ function TeamSprints({ teamId, onTicketClick }: Props) {
               onClick={() => setShowCreateForm(false)}
               className="text-sm text-slate-600 px-3 py-1.5 rounded-md hover:bg-slate-100"
             >
-              Anulează
+              Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
               className="text-sm font-medium bg-slate-900 text-white px-3 py-1.5 rounded-md hover:bg-slate-800 disabled:opacity-50"
             >
-              {isSubmitting ? "Se creează..." : "Creează"}
+              {isSubmitting ? "Creating..." : "Create"}
             </button>
           </div>
         </form>
@@ -178,16 +178,14 @@ function TeamSprints({ teamId, onTicketClick }: Props) {
               {isExpanded && (
                 <div className="border-t border-slate-200 bg-slate-50">
                   {total === 0 ? (
-                    <p className="text-sm text-slate-400 italic p-4">
-                      Niciun ticket în acest sprint.
-                    </p>
+                    <p className="text-sm text-slate-400 italic p-4">No tickets in this sprint.</p>
                   ) : (
                     <table className="w-full text-sm">
                       <thead className="text-slate-500 text-left">
                         <tr>
-                          <th className="px-4 py-2 font-medium">Titlu</th>
+                          <th className="px-4 py-2 font-medium">Title</th>
                           <th className="px-4 py-2 font-medium">Status</th>
-                          <th className="px-4 py-2 font-medium">Prioritate</th>
+                          <th className="px-4 py-2 font-medium">Priority</th>
                           <th className="px-4 py-2 font-medium">Assignee</th>
                         </tr>
                       </thead>
@@ -222,7 +220,7 @@ function TeamSprints({ teamId, onTicketClick }: Props) {
         })}
 
         {sprints.length === 0 && (
-          <p className="text-sm text-slate-400 italic">Nu există sprinturi create încă.</p>
+          <p className="text-sm text-slate-400 italic">No sprints have been created yet.</p>
         )}
       </div>
     </div>

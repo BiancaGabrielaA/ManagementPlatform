@@ -54,13 +54,13 @@ function TeamTickets({ teamId, onTicketClick}: Props) {
   };
 
   const handleDelete = async (ticketId: number) => {
-    if (!confirm("Sigur vrei să ștergi acest ticket?")) return;
+    if (!confirm("Are you sure you want to delete this ticket?")) return;
     setDeletingId(ticketId);
     try {
       await deleteTicket(ticketId);
       setTickets((prev) => prev.filter((t) => t.id !== ticketId));
     } catch {
-      setError("Nu am putut șterge ticketul.");
+      setError("Failed to delete the ticket.");
     } finally {
       setDeletingId(null);
     }
@@ -90,7 +90,7 @@ function TeamTickets({ teamId, onTicketClick}: Props) {
     return result;
   }, [tickets, statusFilter, priorityFilter, assigneeFilter, sortBy]);
 
-  if (isLoading) return <p className="text-sm text-slate-500">Se încarcă ticketele...</p>;
+  if (isLoading) return <p className="text-sm text-slate-500">Loading tickets...</p>;
   if (error) return <p className="text-sm text-red-600">{error}</p>;
 
   return (
@@ -113,7 +113,7 @@ function TeamTickets({ teamId, onTicketClick}: Props) {
             onChange={(e) => setPriorityFilter(e.target.value as Priority | "ALL")}
             className="text-sm border border-slate-200 rounded-md px-2 py-1"
           >
-            <option value="ALL">Toate prioritățile</option>
+            <option value="ALL">All priorities</option>
             <option value="LOW">Low</option>
             <option value="MEDIUM">Medium</option>
             <option value="HIGH">High</option>
@@ -126,7 +126,7 @@ function TeamTickets({ teamId, onTicketClick}: Props) {
             }
             className="text-sm border border-slate-200 rounded-md px-2 py-1"
           >
-            <option value="ALL">Toți membrii</option>
+            <option value="ALL">All members</option>
             {assignees.map(([id, name]) => (
               <option key={id} value={id}>{name}</option>
             ))}
@@ -137,8 +137,8 @@ function TeamTickets({ teamId, onTicketClick}: Props) {
             onChange={(e) => setSortBy(e.target.value as "createdAt" | "priority")}
             className="text-sm border border-slate-200 rounded-md px-2 py-1"
           >
-            <option value="createdAt">Sortează: Data</option>
-            <option value="priority">Sortează: Prioritate</option>
+            <option value="createdAt">Sort by Date</option>
+            <option value="priority">Sort by Priority</option>
           </select>
         </div>
 
@@ -147,7 +147,7 @@ function TeamTickets({ teamId, onTicketClick}: Props) {
             onClick={() => setShowCreateModal(true)}
             className="text-sm font-medium bg-slate-900 text-white px-3 py-1.5 rounded-md hover:bg-slate-800 transition"
           >
-            + Ticket nou
+            + Add new ticket
           </button>
         )}
       </div>
@@ -156,11 +156,11 @@ function TeamTickets({ teamId, onTicketClick}: Props) {
         <table className="w-full text-sm">
           <thead className="bg-slate-50 text-slate-500 text-left">
             <tr>
-              <th className="px-4 py-2 font-medium">Titlu</th>
+              <th className="px-4 py-2 font-medium">Title</th>
               <th className="px-4 py-2 font-medium">Status</th>
-              <th className="px-4 py-2 font-medium">Prioritate</th>
+              <th className="px-4 py-2 font-medium">Priority</th>
               <th className="px-4 py-2 font-medium">Assignee</th>
-              <th className="px-4 py-2 font-medium">Creat</th>
+              <th className="px-4 py-2 font-medium">Created</th>
               {canManage && <th className="px-4 py-2 font-medium"></th>}
             </tr>
           </thead>
@@ -197,7 +197,7 @@ function TeamTickets({ teamId, onTicketClick}: Props) {
             {filteredTickets.length === 0 && (
               <tr>
                 <td colSpan={canManage ? 6 : 5} className="px-4 py-6 text-center text-slate-400">
-                  Niciun ticket găsit.
+                  No tickets found.
                 </td>
               </tr>
             )}

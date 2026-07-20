@@ -58,7 +58,7 @@ function TeamBacklog({ teamId, onTicketClick }: Props) {
     }
   };
 
-  if (isLoading) return <p className="text-sm text-slate-500">Se încarcă backlog-ul...</p>;
+  if (isLoading) return <p className="text-sm text-slate-500">Loading backlog...</p>;
   if (error) return <p className="text-sm text-red-600">{error}</p>;
 
   return (
@@ -66,7 +66,7 @@ function TeamBacklog({ teamId, onTicketClick }: Props) {
       <div className="mb-4">
         <h2 className="text-sm font-semibold text-slate-700">Backlog</h2>
         <p className="text-xs text-slate-400 mt-1">
-          Tickete neasignate niciunui sprint ({tickets.length})
+          Unassigned Tickets ({tickets.length})
         </p>
       </div>
 
@@ -94,7 +94,7 @@ function TeamBacklog({ teamId, onTicketClick }: Props) {
         ))}
 
         {tickets.length === 0 && (
-          <p className="text-sm text-slate-400 italic">Backlog-ul este gol.</p>
+          <p className="text-sm text-slate-400 italic">The backlog is empty.</p>
         )}
       </div>
     </div>

@@ -24,7 +24,7 @@ function ManageTeamsPage() {
       const data = await getAllTeams();
       setTeams(data);
     } catch {
-      setError("Nu am putut încărca echipele.");
+      setError("Failed to load the team.");
     } finally {
       setIsLoading(false);
     }
@@ -36,7 +36,7 @@ function ManageTeamsPage() {
   };
 
   if (isLoading) {
-    return <div className="p-8 text-sm text-slate-500">Se încarcă...</div>;
+    return <div className="p-8 text-sm text-slate-500">Loading...</div>;
   }
 
   return (
@@ -60,7 +60,7 @@ function ManageTeamsPage() {
 
       {teams.length === 0 ? (
         <div className="rounded-xl border border-dashed border-slate-300 p-12 text-center text-sm text-slate-500">
-          Nicio echipă creată încă.
+          No team created yet.
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -80,7 +80,7 @@ function ManageTeamsPage() {
               </div>
 
               <p className="mb-4 flex-1 text-sm text-slate-500">
-                {team.description || "Fără descriere"}
+                {team.description || "No description"}
               </p>
 
               <button

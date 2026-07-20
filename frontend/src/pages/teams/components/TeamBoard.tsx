@@ -59,12 +59,12 @@ function TeamBoard({ teamId, onTicketClick }: Props) {
     try {
       await updateTicketStatus(draggedId, newStatus);
     } catch {
-      setError("Nu am putut actualiza ticketul.");
-      setTickets(previousTickets); // revert la eroare
+      setError("Failed to update the ticket.");
+      setTickets(previousTickets); 
     }
   };
 
-  if (isLoading) return <p className="text-sm text-slate-500">Se încarcă board-ul...</p>;
+  if (isLoading) return <p className="text-sm text-slate-500">Loading board...</p>;
   if (error) return <p className="text-sm text-red-600">{error}</p>;
 
   return (
@@ -113,7 +113,7 @@ function TeamBoard({ teamId, onTicketClick }: Props) {
               ))}
 
               {columnTickets.length === 0 && (
-                <p className="text-xs text-slate-400 italic">Niciun ticket</p>
+                <p className="text-xs text-slate-400 italic">No ticket</p>
               )}
             </div>
           </div>

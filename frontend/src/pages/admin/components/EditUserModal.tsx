@@ -25,7 +25,7 @@ function EditUserModal({ user, onClose, onSaved }: Props) {
       onSaved({ ...user, ...updated });
       onClose();
     } catch {
-      setError("Nu am putut salva modificările. Încearcă din nou.");
+      setError("Failed to save changes. Please try again.");
     } finally {
       setIsSaving(false);
     }

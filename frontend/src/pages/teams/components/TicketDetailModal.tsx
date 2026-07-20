@@ -88,7 +88,7 @@ function TicketDetailModal({ ticketId, teamId, onClose, onUpdated }: Props) {
     }
   };
 
-  // valorile afișate: pending are prioritate față de ticket (draft peste original)
+  
   const displayTitle = pending.title ?? ticket?.title ?? "";
   const displayDescription = pending.description ?? ticket?.description ?? "";
   const displayStatus = pending.status ?? ticket?.status;
@@ -123,7 +123,7 @@ function TicketDetailModal({ ticketId, teamId, onClose, onUpdated }: Props) {
   };
 
   const handleClose = () => {
-    if (hasChanges && !confirm("Ai modificări nesalvate. Închizi fără să salvezi?")) return;
+    if (hasChanges && !confirm("Unsaved changes. Close without saving?")) return;
     onClose();
   };
 
@@ -135,7 +135,7 @@ function TicketDetailModal({ ticketId, teamId, onClose, onUpdated }: Props) {
       setComments((prev) => [...prev, comment]);
       setNewComment("");
     } catch {
-      setError("Nu am putut adăuga comentariul.");
+      setError("Failed to add the comment.");
     } finally {
       setIsSubmittingComment(false);
     }
@@ -148,17 +148,17 @@ function TicketDetailModal({ ticketId, teamId, onClose, onUpdated }: Props) {
       setComments((prev) => prev.map((c) => (c.id === commentId ? updated : c)));
       setEditingCommentId(null);
     } catch {
-      setError("Nu am putut edita comentariul.");
+      setError("Failed to edit the comment.");
     }
   };
 
   const handleDeleteComment = async (commentId: number) => {
-    if (!confirm("Ștergi acest comentariu?")) return;
+    if (!confirm("Are you sure you want to delete this comment?")) return;
     try {
       await deleteComment(ticketId, commentId);
       setComments((prev) => prev.filter((c) => c.id !== commentId));
     } catch {
-      setError("Nu am putut șterge comentariul.");
+      setError("Failed to delete the comment.");
     }
   };
 
@@ -172,7 +172,7 @@ function TicketDetailModal({ ticketId, teamId, onClose, onUpdated }: Props) {
           </span>
           <div className="flex items-center gap-3">
             {hasChanges && (
-              <span className="text-xs text-amber-600 font-medium">Modificări nesalvate</span>
+              <span className="text-xs text-amber-600 font-medium">Unsaved changes</span>
             )}
             <button onClick={handleClose} className="text-slate-400 hover:text-slate-600 text-xl leading-none">
               ×
@@ -180,15 +180,13 @@ function TicketDetailModal({ ticketId, teamId, onClose, onUpdated }: Props) {
           </div>
         </div>
 
-        {isLoading && <p className="p-6 text-sm text-slate-500">Se încarcă...</p>}
+        {isLoading && <p className="p-6 text-sm text-slate-500">Loading...</p>}
         {error && <p className="px-6 pt-3 text-sm text-red-600">{error}</p>}
 
         {ticket && (
           <>
             <div className="flex flex-1 overflow-hidden">
-              {/* Main content */}
               <div className="flex-1 overflow-y-auto px-6 py-4 space-y-6">
-                {/* Title */}
                 <div>
                   <input
                     value={displayTitle}
@@ -196,23 +194,19 @@ function TicketDetailModal({ ticketId, teamId, onClose, onUpdated }: Props) {
                     className="w-full text-lg font-semibold text-slate-900 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded-md px-2 py-1 -mx-2 focus:outline-none"
                   />
                 </div>
-
-                {/* Description */}
                 <div>
-                  <p className="text-xs font-semibold text-slate-500 uppercase mb-1">Descriere</p>
+                  <p className="text-xs font-semibold text-slate-500 uppercase mb-1">Description</p>
                   <textarea
                     value={displayDescription}
                     onChange={(e) => setField("description", e.target.value)}
                     rows={5}
-                    placeholder="Adaugă o descriere..."
+                    placeholder="Add description..."
                     className="w-full text-sm text-slate-700 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded-md px-2 py-2 -mx-2 resize-none focus:outline-none"
                   />
                 </div>
-
-                {/* Comments — rămân live, nu fac parte din draft */}
                 <div>
                   <p className="text-xs font-semibold text-slate-500 uppercase mb-3">
-                    Comentarii ({comments.length})
+                    Comments ({comments.length})
                   </p>
 
                   <div className="space-y-3 mb-4">
@@ -239,13 +233,13 @@ function TicketDetailModal({ ticketId, teamId, onClose, onUpdated }: Props) {
                                     }}
                                     className="text-xs text-slate-500 hover:text-slate-700"
                                   >
-                                    Editează
+                                    Edit
                                   </button>
                                   <button
                                     onClick={() => handleDeleteComment(comment.id)}
                                     className="text-xs text-red-500 hover:text-red-700"
                                   >
-                                    Șterge
+                                    Delete
                                   </button>
                                 </>
                               )}
@@ -266,13 +260,13 @@ function TicketDetailModal({ ticketId, teamId, onClose, onUpdated }: Props) {
                                   onClick={() => handleSaveEditedComment(comment.id)}
                                   className="text-xs font-medium bg-slate-900 text-white px-2 py-1 rounded-md"
                                 >
-                                  Salvează
+                                  Save
                                 </button>
                                 <button
                                   onClick={() => setEditingCommentId(null)}
                                   className="text-xs text-slate-500 px-2 py-1"
                                 >
-                                  Anulează
+                                  Cancel
                                 </button>
                               </div>
                             </div>
@@ -286,7 +280,7 @@ function TicketDetailModal({ ticketId, teamId, onClose, onUpdated }: Props) {
                     })}
 
                     {comments.length === 0 && (
-                      <p className="text-sm text-slate-400 italic">Niciun comentariu încă.</p>
+                      <p className="text-sm text-slate-400 italic">No comments yet.</p>
                     )}
                   </div>
 
@@ -294,7 +288,7 @@ function TicketDetailModal({ ticketId, teamId, onClose, onUpdated }: Props) {
                     <textarea
                       value={newComment}
                       onChange={(e) => setNewComment(e.target.value)}
-                      placeholder="Scrie un comentariu..."
+                      placeholder="Write a comment..."
                       rows={2}
                       className="flex-1 text-sm border border-slate-300 rounded-md px-3 py-2 resize-none"
                     />
@@ -303,7 +297,7 @@ function TicketDetailModal({ ticketId, teamId, onClose, onUpdated }: Props) {
                       disabled={isSubmittingComment || !newComment.trim()}
                       className="text-sm font-medium bg-slate-900 text-white px-3 py-1.5 rounded-md hover:bg-slate-800 disabled:opacity-50 self-end"
                     >
-                      Trimite
+                      Send
                     </button>
                   </div>
                 </div>

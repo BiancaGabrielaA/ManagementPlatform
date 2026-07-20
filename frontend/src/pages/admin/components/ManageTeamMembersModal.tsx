@@ -18,7 +18,7 @@ function ManageTeamMembersModal({ team, onClose, onMembersChanged }: Props) {
 
   useEffect(() => {
 
-    getAllUsers().then(setAllUsers).catch(() => setError("Nu am putut încărca userii."));
+    getAllUsers().then(setAllUsers).catch(() => setError(("Failed to load users.")));
   }, []);
 
   const memberIds = new Set(members?.map((m) => m.id));
@@ -35,7 +35,7 @@ function ManageTeamMembersModal({ team, onClose, onMembersChanged }: Props) {
       setMembers(updated);
       onMembersChanged(team.id, updated);
     } catch(error) {
-      setError("Nu am putut adăuga userul în echipă.");
+      setError("I couldn't add the user to the team.");
     } finally {
       setPendingId(null);
     }
@@ -50,7 +50,7 @@ function ManageTeamMembersModal({ team, onClose, onMembersChanged }: Props) {
       setMembers(updated);
       onMembersChanged(team.id, updated);
     } catch {
-      setError("Nu am putut scoate userul din echipă.");
+      setError("I couldn't remove the user from the team.");
     } finally {
       setPendingId(null);
     }
@@ -78,7 +78,7 @@ function ManageTeamMembersModal({ team, onClose, onMembersChanged }: Props) {
           </p>
           <div className="max-h-40 space-y-1 overflow-y-auto">
             {members?.length === 0 && (
-              <p className="text-sm text-slate-400">Nicio persoană în echipă încă.</p>
+              <p className="text-sm text-slate-400">No team members yet.</p>
             )}
             {members?.map((user) => (
               <div
@@ -136,7 +136,7 @@ function ManageTeamMembersModal({ team, onClose, onMembersChanged }: Props) {
               </div>
             ))}
             {availableUsers.length === 0 && (
-              <p className="text-sm text-slate-400">Niciun rezultat.</p>
+              <p className="text-sm text-slate-400">No results.</p>
             )}
           </div>
         </div>

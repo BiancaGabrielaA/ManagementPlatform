@@ -28,7 +28,7 @@ function ManageUsersPage() {
   };
 
   if (isLoading) {
-    return <div className="p-8 text-sm text-slate-500">Se încarcă...</div>;
+    return <div className="p-8 text-sm text-slate-500">Loading...</div>;
   }
 
   return (
@@ -86,7 +86,7 @@ function ManageUsersPage() {
 
         {users.length === 0 && (
           <div className="p-8 text-center text-sm text-slate-500">
-            Niciun user găsit.
+            No user found.
           </div>
         )}
       </div>

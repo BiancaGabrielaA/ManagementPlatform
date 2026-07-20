@@ -39,13 +39,13 @@ function TeamPage() {
       const data = await getTeamById(teamId);
       setTeam(data);
     } catch {
-      setError("Nu am putut încărca echipa.");
+      setError("Failed to load the team.");
     } finally {
       setIsLoading(false);
     }
   };
 
-  if (isLoading) return <p className="p-6 text-sm text-slate-500">Se încarcă echipa...</p>;
+  if (isLoading) return <p className="p-6 text-sm text-slate-500">Loading team...</p>;
   if (error) return <p className="p-6 text-sm text-red-600">{error}</p>;
   if (!team) return null;
 
@@ -86,7 +86,7 @@ function TeamPage() {
           ticketId={selectedTicketId}
           teamId={team.id}
           onClose={() => setSelectedTicketId(null)}
-          onUpdated={() => {/* refetch dacă vrei */}}
+          onUpdated={() => {}}
         />
       )}
     </div>

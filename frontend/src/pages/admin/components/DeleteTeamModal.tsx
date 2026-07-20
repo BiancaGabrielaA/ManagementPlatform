@@ -20,7 +20,7 @@ function DeleteTeamModal({ team, onClose, onDeleted }: Props) {
       onDeleted(team.id);
       onClose();
     } catch {
-      setError("Nu am putut șterge echipa. Încearcă din nou.");
+      setError("Failed to delete the team. Please try again.");
     } finally {
       setIsDeleting(false);
     }
@@ -47,9 +47,9 @@ function DeleteTeamModal({ team, onClose, onDeleted }: Props) {
             <AlertTriangle className="h-5 w-5 text-red-600" />
           </div>
           <p className="text-sm text-slate-600">
-            Sigur vrei să ștergi echipa{" "}
+            Are you sure you want to delete the team{" "}
             <span className="font-semibold text-slate-900">{team.name}</span>?
-            Tichetele echipei vor rămâne, dar echipa va dispărea definitiv.
+            This action cannot be undone and will permanently delete the team and all associated data.
           </p>
         </div>
 
