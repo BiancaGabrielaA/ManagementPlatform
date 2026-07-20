@@ -17,9 +17,10 @@ const PRIORITY_COLORS: Record<string, string> = {
 
 interface Props {
   teamId: number;
+  onTicketClick: (ticketId: number) => void;
 }
 
-function TeamBoard({ teamId }: Props) {
+function TeamBoard({ teamId, onTicketClick }: Props) {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -88,6 +89,7 @@ function TeamBoard({ teamId }: Props) {
                   key={ticket.id}
                   draggable
                   onDragStart={() => setDraggedId(ticket.id)}
+                  onClick={() => onTicketClick(ticket.id)}
                   className="bg-white rounded-md border border-slate-200 p-3 shadow-sm cursor-grab active:cursor-grabbing hover:border-slate-300 transition"
                 >
                   <p className="text-sm font-medium text-slate-900 mb-1">

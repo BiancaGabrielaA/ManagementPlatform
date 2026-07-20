@@ -23,6 +23,10 @@ export interface Ticket {
     name: string;
     email: string;
   } | null;
+  sprint?: {
+    id: number;
+    name: string;
+  } | null;
   createdAt: string;
 }
 
@@ -47,5 +51,26 @@ export async function deleteTicket(ticketId: number)
 
 export async function createTicket(dto: CreateTicketDto): Promise<Ticket> {
   const response = await api.post("/tickets", dto);
+  return response.data;
+}
+
+export async function getBacklog(teamId: number): Promise<Ticket[]> {
+  const response = await api.get(`/tickets/team/${teamId}/backlog`);
+  return response.data;
+}
+
+export async function getTicketById(id: number): Promise<Ticket> {
+  const response = await api.get(`/tickets/${id}`);
+  return response.data;
+}
+
+export async function updateTicket(
+  id: number,
+  data: Partial<Pick<Ticket, "status" | "priority" | "title" | "description"> & {
+      assigneeId: number | null;
+      sprintId: number | null;
+    }>
+): Promise<Ticket> {
+  const response = await api.patch(`/tickets/${id}`, data);
   return response.data;
 }

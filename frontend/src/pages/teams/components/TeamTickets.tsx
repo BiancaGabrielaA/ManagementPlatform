@@ -6,6 +6,7 @@ import CreateTicketModal from "../components/CreateTicketModal";
 
 interface Props {
   teamId: number;
+  onTicketClick: (ticketId: number) => void;
 }
 
 const STATUS_LABELS: Record<TicketStatus, string> = {
@@ -21,7 +22,7 @@ const PRIORITY_COLORS: Record<Priority, string> = {
   HIGH: "bg-orange-100 text-orange-700"
 };
 
-function TeamTickets({ teamId }: Props) {
+function TeamTickets({ teamId, onTicketClick}: Props) {
   const { user } = useAuth();
   const canManage = user?.role === "PROJECT_MANAGER";
 
@@ -165,7 +166,7 @@ function TeamTickets({ teamId }: Props) {
           </thead>
           <tbody>
             {filteredTickets.map((ticket) => (
-              <tr key={ticket.id} className="border-t border-slate-100">
+              <tr key={ticket.id}  onClick={() => onTicketClick(ticket.id)} className="border-t border-slate-100">
                 <td className="px-4 py-2 text-slate-900">{ticket.title}</td>
                 <td className="px-4 py-2 text-slate-600">{STATUS_LABELS[ticket.status]}</td>
                 <td className="px-4 py-2">

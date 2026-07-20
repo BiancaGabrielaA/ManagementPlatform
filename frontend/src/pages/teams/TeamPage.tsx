@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getTeamById } from "../../api/teams.api";
-import type { Team } from "../../api/teams.api";;
+import type { Team } from "../../api/teams.api";
 
 import TeamBoard from "./components/TeamBoard"
 import TeamTickets from "./components/TeamTickets";
 import TeamSprints from "./components/TeamSprints";
 import TeamBacklog from "./components/TeamBacklog";
-import TeamMembers from "./components//TeamMembers";
+import TeamMembers from "./components/TeamMembers";
+import TicketDetailModal from "./components/TicketDetailModal";
 
 type TabKey = "board" | "tickets" | "sprints" | "backlog" | "members";
 
@@ -25,6 +26,7 @@ function TeamPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [activeTab, setActiveTab] = useState<TabKey>("board");
+  const [selectedTicketId, setSelectedTicketId] = useState<number | null>(null);
 
   useEffect(() => {
     if (!id) return;
@@ -72,13 +74,21 @@ function TeamPage() {
         ))}
       </div>
 
-      {activeTab === "board" && <TeamBoard teamId={team.id} />}
-      {activeTab === "tickets" && <TeamTickets teamId={team.id} />}
-      {activeTab === "sprints" && <TeamSprints teamId={team.id} />}
-      {activeTab === "backlog" && <TeamBacklog teamId={team.id} />}
+      {activeTab === "board" && <TeamBoard teamId={team.id} onTicketClick={setSelectedTicketId}/>}
+      {activeTab === "tickets" && <TeamTickets teamId={team.id} onTicketClick={setSelectedTicketId}/>}
+      {activeTab === "sprints" && <TeamSprints teamId={team.id} onTicketClick={setSelectedTicketId}/>}
+      {activeTab === "backlog" && <TeamBacklog teamId={team.id} onTicketClick={setSelectedTicketId}/>}
       {activeTab === "members" && (
         <TeamMembers team={team} onMembersChanged={(_, users) => setTeam({ ...team, users })} />
       )}  
+      {selectedTicketId && (
+        <TicketDetailModal
+          ticketId={selectedTicketId}
+          teamId={team.id}
+          onClose={() => setSelectedTicketId(null)}
+          onUpdated={() => {/* refetch dacă vrei */}}
+        />
+      )}
     </div>
   );
 }
