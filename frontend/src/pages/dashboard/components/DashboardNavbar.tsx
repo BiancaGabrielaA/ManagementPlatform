@@ -28,7 +28,7 @@ function DashboardNavbar() {
   const navItemsSoftware = [
     { label: "Dashboard", to: "/dashboard", icon: LayoutDashboard },
     { label: "Teams", to: "/teams", icon: Users },
-    { label: "My Tickets", to: "/tickets", icon: Ticket },
+    { label: "My Tickets", to: "/mytickets", icon: Ticket },
   ];
 
   const navItemsAdmin = [

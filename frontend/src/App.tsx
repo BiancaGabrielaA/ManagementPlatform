@@ -13,6 +13,7 @@ import ManageUsersPage from "./pages/admin/ManageUsersPage";
 import DashboardLayout from "./pages/dashboard/DashboardLayout";
 import TeamsPage from "./pages/teams/TeamsPage";
 import TeamPage from "./pages/teams/TeamPage";
+import MyTicketsPage from "./pages/tickets/MyTicketsPage";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/admin/users" element={<ManageUsersPage />} />
             <Route path="/teams" element={<TeamsPage />} />
             <Route path="/teams/:id" element={<TeamPage />} />
+            <Route path="/mytickets" element={<MyTicketsPage />} />
           </Route>
         </Route>
 

@@ -18,6 +18,7 @@ export interface Ticket {
   status: TicketStatus;
   priority: Priority;
   teamId: number;
+  team?: { id: number; name: string } | null;
   assignee?: {
     id: number;
     name: string;
@@ -72,5 +73,10 @@ export async function updateTicket(
     }>
 ): Promise<Ticket> {
   const response = await api.patch(`/tickets/${id}`, data);
+  return response.data;
+}
+
+export async function getMyTickets(): Promise<Ticket[]> {
+  const response = await api.get("/tickets/mine");
   return response.data;
 }
