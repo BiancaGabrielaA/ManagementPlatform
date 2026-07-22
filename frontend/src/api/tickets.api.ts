@@ -80,3 +80,12 @@ export async function getMyTickets(): Promise<Ticket[]> {
   const response = await api.get("/tickets/mine");
   return response.data;
 }
+
+export async function getNeedsAttention(): Promise<Ticket[]> {
+  try {
+    const response = await api.get("/tickets/need-attention");
+    return response.data;
+  } catch (err) {
+    throw err;
+  }
+}
