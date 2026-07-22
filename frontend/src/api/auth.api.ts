@@ -19,6 +19,10 @@ export interface User {
   role: string;
 }
 
+export interface ChangePasswordDto {
+  currentPassword: string;
+  newPassword: string;
+}
 
 export async function registerUser(
   data: RegisterRequest
@@ -58,5 +62,10 @@ export async function getCurrentUser() {
 
 export async function logoutUser() {
   const response = await api.post("/auth/logout");
+  return response.data;
+}
+
+export async function changePassword(dto: ChangePasswordDto): Promise<void> {
+  const response = await api.patch("/auth/change-password", dto);
   return response.data;
 }

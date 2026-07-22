@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { SquareKanban, Users, Ticket, LogOut, LayoutDashboard, BarChart3, Building2 } from "lucide-react";
+import { SquareKanban, Users, Ticket, LogOut, KeyRound, LayoutDashboard, BarChart3, Building2 } from "lucide-react";
 import { useAuth } from "@/auth/AuthContext";
 
 function DashboardNavbar() {
@@ -23,6 +23,10 @@ function DashboardNavbar() {
   const handleLogout = async () => {
     await logout();
     navigate("/");
+  };
+
+  const handleChangePassword = () => {
+    navigate("/change-password");
   };
 
   const navItemsSoftware = [
@@ -83,14 +87,24 @@ function DashboardNavbar() {
       <div className="relative" ref={menuRef}>
         {menuOpen && (
           <div className="absolute bottom-full left-0 mb-2 w-full rounded-xl border border-slate-200 bg-white p-1 shadow-lg">
-            <button
-              onClick={handleLogout}
-              className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-red-600 hover:bg-red-50"
-            >
-              <LogOut className="h-4 w-4" />
-              Logout
-            </button>
-          </div>
+          <button
+            onClick={handleChangePassword}
+            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
+          >
+            <KeyRound className="h-4 w-4" />
+            Change password
+          </button>
+
+          <div className="my-1 border-t border-slate-100" />
+
+          <button
+            onClick={handleLogout}
+            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-red-600 hover:bg-red-50"
+          >
+            <LogOut className="h-4 w-4" />
+            Logout
+          </button>
+        </div>
         )}
 
         <button

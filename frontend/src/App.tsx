@@ -14,6 +14,7 @@ import DashboardLayout from "./pages/dashboard/DashboardLayout";
 import TeamsPage from "./pages/teams/TeamsPage";
 import TeamPage from "./pages/teams/TeamPage";
 import MyTicketsPage from "./pages/tickets/MyTicketsPage";
+import ChangePasswordPage from "./pages/auth/ChangePasswordPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
 
         {/* Protected routes */}
         <Route element={<ProtectedRoute />}>
+          <Route path="/change-password" element={<ChangePasswordPage />} />
           <Route element={<DashboardLayout/>}>
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/admin/teams" element={<ManageTeamsPage />} />
