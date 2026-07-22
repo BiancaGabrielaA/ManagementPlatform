@@ -69,3 +69,8 @@ export async function changePassword(dto: ChangePasswordDto): Promise<void> {
   const response = await api.patch("/auth/change-password", dto);
   return response.data;
 }
+
+export async function verifyEmail(token: string): Promise<{ message: string }> {
+  const response = await api.get(`/auth/verify-email?token=${token}`);
+  return response.data;
+}

@@ -15,6 +15,7 @@ import TeamsPage from "./pages/teams/TeamsPage";
 import TeamPage from "./pages/teams/TeamPage";
 import MyTicketsPage from "./pages/tickets/MyTicketsPage";
 import ChangePasswordPage from "./pages/auth/ChangePasswordPage";
+import VerifyEmailPage from "./pages/auth/VerifyEmailPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/verify-email" element={<VerifyEmailPage />} />
 
         {/* Protected routes */}
         <Route element={<ProtectedRoute />}>

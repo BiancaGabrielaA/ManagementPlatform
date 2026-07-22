@@ -15,11 +15,11 @@ services:
   backend:
     build: ./backend
     container_name: management-platform-backend
+    env_file:
+      - ./backend/.env
     restart: unless-stopped
     depends_on:
       - db
-    environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/management_platform
     ports:
       - "3000:3000"
     volumes:

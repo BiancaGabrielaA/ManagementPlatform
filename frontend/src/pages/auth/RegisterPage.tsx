@@ -26,6 +26,7 @@ function RegisterPage() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [serverError, setServerError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showEmailConfirmation, setShowEmailConfirmation] = useState(false);
 
 
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
@@ -68,13 +69,13 @@ function RegisterPage() {
     setIsSubmitting(true);
 
     try {
-        await registerUser({
-          name: formData.fullName,
-          email: formData.email,
-          password: formData.password,
-          confirmPassword: formData.confirmPassword
-        });
-        navigate("/login");
+      await registerUser({
+        name: formData.fullName,
+        email: formData.email,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword
+      });
+      setShowEmailConfirmation(true); 
     } catch(error){
       const axiosError = error as AxiosError<{ message?: string }>;
       setServerError(
@@ -136,6 +137,14 @@ function RegisterPage() {
           <h2 className="text-4xl font-bold text-slate-900">Create your account</h2>
           <p className="mt-3 text-slate-600">Join TaskFlow and start organizing your projects today.</p>
 
+          {showEmailConfirmation && (
+            <div className="mt-6 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3">
+              <p className="text-sm text-blue-800">
+                We'll send a verification email to the address you provide. Please confirm your email before signing in.
+              </p>
+            </div>
+          )}
+         
           {serverError && (
             <div className="mt-6 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-600">
               {serverError}
