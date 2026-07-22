@@ -102,7 +102,7 @@ function TeamTickets({ teamId, onTicketClick}: Props) {
             onChange={(e) => setStatusFilter(e.target.value as TicketStatus | "ALL")}
             className="text-sm border border-slate-200 rounded-md px-2 py-1"
           >
-            <option value="ALL">Toate statusurile</option>
+            <option value="ALL">All statuses</option>
             {Object.entries(STATUS_LABELS).map(([key, label]) => (
               <option key={key} value={key}>{label}</option>
             ))}

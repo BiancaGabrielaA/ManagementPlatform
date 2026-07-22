@@ -33,7 +33,7 @@ function MyTicketsPage() {
       const data = await getMyTickets();
       setTickets(data);
     } catch {
-      setError("Nu am putut încărca ticketele.");
+      setError("Unable to load tickets.");
     } finally {
       setIsLoading(false);
     }
@@ -49,18 +49,18 @@ function MyTicketsPage() {
     );
   }, [tickets, search]);
 
-  if (isLoading) return <p className="p-6 text-sm text-slate-500">Se încarcă ticketele...</p>;
+  if (isLoading) return <p className="p-6 text-sm text-slate-500">Tickets loading...</p>;
   if (error) return <p className="p-6 text-sm text-red-600">{error}</p>;
 
   return (
     <div className="p-6">
-      <h1 className="text-xl font-semibold text-slate-900 mb-4">Ticketele mele</h1>
+      <h1 className="text-xl font-semibold text-slate-900 mb-4">My Tickets</h1>
 
       <input
         type="text"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        placeholder="Caută după titlu sau ID..."
+        placeholder="Search title or ID..."
         className="w-full max-w-sm text-sm border border-slate-200 rounded-md px-3 py-2 mb-4"
       />
 
@@ -69,10 +69,10 @@ function MyTicketsPage() {
           <thead className="bg-slate-50 text-slate-500 text-left">
             <tr>
               <th className="px-4 py-2 font-medium">ID</th>
-              <th className="px-4 py-2 font-medium">Titlu</th>
-              <th className="px-4 py-2 font-medium">Echipă</th>
+              <th className="px-4 py-2 font-medium">Title</th>
+              <th className="px-4 py-2 font-medium">Team</th>
               <th className="px-4 py-2 font-medium">Status</th>
-              <th className="px-4 py-2 font-medium">Prioritate</th>
+              <th className="px-4 py-2 font-medium">Priority</th>
               <th className="px-4 py-2 font-medium">Sprint</th>
             </tr>
           </thead>
@@ -99,7 +99,7 @@ function MyTicketsPage() {
             {filteredTickets.length === 0 && (
               <tr>
                 <td colSpan={6} className="px-4 py-6 text-center text-slate-400">
-                  {search ? "Niciun rezultat." : "Nu ai tickete asignate."}
+                  {search ? "No results." : "You don't have any tickets assigned."}
                 </td>
               </tr>
             )}
